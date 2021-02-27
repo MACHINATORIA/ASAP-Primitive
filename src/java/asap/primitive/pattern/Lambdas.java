@@ -19,6 +19,16 @@ public class Lambdas {
         public R execute( );
     }
 
+    public interface VoidHandler< A > {
+
+        public void handle( A argument );
+    }
+
+    public interface ResultHandler< R, A > {
+
+        public R handle( A argument );
+    }
+
     public interface BooleanTask extends ResultTask< Boolean > {
     }
 
