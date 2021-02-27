@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<project name="ASAP-Primitive"
+         default="deploy-current-release-version"
+         basedir="./">
+
+    <import file="${basedir}/../../../_toolset/ant-templates.xml" />
+
+    <!-- ...................................................................... -->
+
+    <target name="build-selected-version">
+
+        <deploySingleJar artifactName="ASAP Primitive"
+                         artifactDescription="Assistentes e padrões primitivos de desenvolvimento Java"
+                         artifactPrefix="asapPrimitive"
+                         javaPackages="asap/primitive/**"
+                         artifactDeployDir="${product-component-dir}/asap"
+                         artifactHistoryDir="${product-component-history-dir}/asap"
+                         updateHistory="yes">
+            <deploySingleJarJavaClassPath>
+                <fileset dir="${product-toolset-dir}/jaxb"
+                         includes="jakarta.xml.bind-api.jar" />
+            </deploySingleJarJavaClassPath>
+        </deploySingleJar>
+
+    </target>
+
+    <!-- ...................................................................... -->
+
+</project>
