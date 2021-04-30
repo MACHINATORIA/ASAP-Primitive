@@ -468,11 +468,13 @@ public class DateTimeHelper {
                                            int hourOffset,
                                            int minuteOffset,
                                            int secondOffset ) {
-        return new Date( initialDate.getTime( )
-                         + ( (long) dayOffset * 24 * 60 * 60 * 1000 )
-                         + ( (long) hourOffset * 60 * 60 * 1000 )
-                         + ( (long) minuteOffset * 60 * 1000 )
-                         + ( (long) secondOffset * 1000 ) );
+        GregorianCalendar tmpResultDate = new GregorianCalendar( );
+        tmpResultDate.setTime( initialDate );
+        tmpResultDate.add( Calendar.DAY_OF_MONTH, dayOffset );
+        tmpResultDate.add( Calendar.HOUR_OF_DAY, hourOffset );
+        tmpResultDate.add( Calendar.MINUTE, minuteOffset );
+        tmpResultDate.add( Calendar.SECOND, secondOffset );
+        return tmpResultDate.getTime( );
     }
 
     public static long getHorarySeconds( Date date ) {

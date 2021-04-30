@@ -39,7 +39,6 @@ import asap.primitive.pattern.ValuePattern.BasicValue;
 import asap.primitive.pattern.ValuePattern.Value;
 import asap.primitive.process.ProcessHelper;
 import asap.primitive.string.StringHelper;
-import asap.primitive.thread.ThreadHelper;
 
 public class LogService {
 
@@ -946,7 +945,7 @@ public class LogService {
             synchronized ( this ) {
                 this.stream.println( message );
                 this.stream.flush( );
-                ThreadHelper.sleep( 2 );
+                // ThreadHelper.sleep( 2 );
             }
         }
     }
@@ -1150,6 +1149,7 @@ public class LogService {
             File tmpFile = this.selectApropriateFile( timestamp );
             if ( tmpFile != null ) {
                 try {
+                    FileHelper.ensureDirectoryExists( tmpFile.getParentFile( ) );
                     FileOutputStream tmpFileStream = new FileOutputStream( tmpFile,
                                                                            true );
                     try {
@@ -1947,12 +1947,6 @@ public class LogService {
                                                 defaultToNull );
         }
 
-        public static Logger getDesenvLogger( String loggerName ) {
-            return CONTEXT_SINGLETON.getLogger( loggerName,
-                                                false,
-                                                true );
-        }
-
         public static Logger getLogger( Class< ? > ownerClass ) {
             return getLogger( ownerClass.getName( ) );
         }
@@ -1965,12 +1959,28 @@ public class LogService {
                               defaultToNull );
         }
 
+        public static Logger getDesenvLogger( String loggerName ) {
+            return CONTEXT_SINGLETON.getLogger( loggerName,
+                                                false,
+                                                true );
+        }
+
         public static Logger getDesenvLogger( Class< ? > ownerClass ) {
             return getDesenvLogger( ownerClass.getName( ) );
+        }
+        
+        public static Logger getSystemLogger( ) {
+            return CONTEXT_SINGLETON.getLogger( "",
+                                                false,
+                                                false );
         }
 
         public static void setMaxLevel( LogLevel maxLevel ) {
             CONTEXT_SINGLETON.setMaxLevel( maxLevel );
+        }
+
+        public static void setMinLevel( LogLevel minLevel ) {
+            CONTEXT_SINGLETON.setMinLevel( minLevel );
         }
 
         public static void setDetails( LogDetail... details ) {

@@ -846,7 +846,7 @@ public class FileHelper {
 
     public static String getFileName( String filePath ) {
         String tmpFilePath = normalizePath( filePath );
-        int tmpLastSlashPos = tmpFilePath.lastIndexOf( File.separator );
+        int tmpLastSlashPos = tmpFilePath.lastIndexOf( NORMALIZED_PATH_SEPARATOR );
         if ( tmpLastSlashPos < 0 ) {
             tmpLastSlashPos = 0;
         }

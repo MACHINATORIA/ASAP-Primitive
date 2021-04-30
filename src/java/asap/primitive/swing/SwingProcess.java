@@ -14,6 +14,7 @@ import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 
 import asap.primitive.lang.ArrayHelper;
+import asap.primitive.log.LogService.LogManager;
 import asap.primitive.swing.SwingHelper.MessageBox;
 
 public abstract class SwingProcess {
@@ -176,7 +177,6 @@ public abstract class SwingProcess {
             }
             this.exit( );
         } );
-        
     }
 
     public void exit( ) {
@@ -213,10 +213,11 @@ public abstract class SwingProcess {
                             SwingProcess.singleton.startProcess( );
                         }
                         catch ( Throwable e ) {
-                            MessageBox.exceptionMessage( e );
+                            LogManager.getSystemLogger( ).exception( e );
                             SwingProcess.singleton.disengageProcess( );
                             SwingProcess.singleton.stopProcess( );
                             SwingProcess.singleton.closeProcess( );
+                            SwingProcess.singleton.shutdown( );
                         }
                     }
                 } );

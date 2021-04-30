@@ -315,7 +315,8 @@ public class HtmlHelper {
                                               "dl",
                                               "li",
                                               "dt",
-                                              "dd" } ) {
+                                              "dd",
+                                              "br" } ) {
             tmpText = tmpText.replaceAll( String.format( "\\[%s\\]",
                                                          tmpTag ),
                                           String.format( "<%s>",

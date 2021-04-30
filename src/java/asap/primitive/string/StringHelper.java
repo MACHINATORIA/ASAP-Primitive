@@ -391,7 +391,7 @@ public class StringHelper {
         return tmpResult.toArray( new String[ 0 ] );
     }
 
-    @SuppressWarnings( "unchecked" )
+    @SafeVarargs
     public static List< String > concatenate( List< String >... lists ) {
         List< String > tmpResult = new ArrayList< String >( );
         for ( List< String > tmpList : lists ) {
